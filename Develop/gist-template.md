@@ -32,7 +32,26 @@ In the URL regex, we see two slashes at the start and end, as seen in ```/wlk/``
 
 ### Quantifiers
 
+Quantifiers denote the number of characters that belong in the string. ```*``` is a quantifier that matches a string that includes __0 or more__ of the character preceding the ```*``` metacharacter. For example, ```wlk*``` matches a string that has ```wl``` followed by 0 or more ```k```.
+
+
+```+``` is a quantifier that matches a string that has __1 or more__ of the character preceding the ```+``` metacharacter. ```wlk+``` matches a string that has ```wl``` followed by 1 or more ```k```. 
+
+
+```?``` is a quantifier that matches a string that has __0 or 1__ of the character preceding ```?``` metacharacter, as in ```wlk?```, which matches a string where ```wl``` is followed by 0 or 1 ```k```. This quanitifier can be found in the first capturing group of the URL regex, ```(https?:\/\/)```, after the "s" character to indicate that the "s" after "http" is optional. It is also found after the first capturing group, ```/^(https?:\/\/)```__?__```([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/```, to denote that the entire first capturing group is optional. Lastly, it is found at the very end of the regex ```/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/```__?__```$/``` to denote the optionally escaped ```/``` at the end of the URL.
+
+```{}``` is a quantifier that matches a string that contains the character preceding the ```{}``` the amount of times delineated in the curled brackets. For example, ```wlk{2}``` matches a string that has ```wl``` followed by 2 ```k```. 
+
+Other ways ```{}``` can be used is with a ```,``` following the number in ```{}```, as in ```wlk{5,}``` which matches a string that has ```wl``` followed by __5 or more__ ```k```. ```wlk{5,10}``` matches a string that has ```wl``` followed by __5 up to 10__ ```k```.
+
+Characters may also be grouped in ```()``` to denote a specific sequence that follows a specific number of times, depending on the quantifier used, as in ```w(lk)*```, which matches a string that has ```w``` followed by __0 or more__ copies of the sequence ```lk```. Used in conjunction with ```{}```, ```w(lk){5,10}``` matches a string that has ```w``` followed by __5 up to 10__ copies of the sequence ```lk```. 
+
 ### Character Classes
+The character class ```\d``` matches a single character that is a digit, from __0 to 9__. 
+
+The character class ```\w``` matches a single word character which can be __alphanumeric__ or __underscore__.
+
+```.``` matches __any__ character. When escaped with a backslash, as in ```\.```, the regex identifies a literal ```.```.
 
 ### Grouping and Capturing
 
