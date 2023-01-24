@@ -19,10 +19,9 @@ This tutorial describes the regex, or sequence of characters that defines the sp
 Components of a regex matching a URL include:
 * Anchors ```^``` ```$```
 * Quantifiers ```*``` ```+``` ```?``` ```{}```
+* Bracket expressions ```[]```
 * Character classes ```\d``` ```\w``` ```.```
 * Grouping and capturing ```()```
-* Bracket expressions ```[]```
-* Greedy match ```*```
 
 ### Anchors
 
@@ -46,6 +45,10 @@ Other ways ```{}``` can be used is with a ```,``` following the number in ```{}`
 
 Characters may also be grouped in ```()``` to denote a specific sequence that follows a specific number of times, depending on the quantifier used, as in ```w(lk)*```, which matches a string that has ```w``` followed by __0 or more__ copies of the sequence ```lk```. Used in conjunction with ```{}```, ```w(lk){5,10}``` matches a string that has ```w``` followed by __5 up to 10__ copies of the sequence ```lk```. 
 
+### Bracket expressions
+
+Square brackets are used to specify character sets. Use a hyphen inside a character set to specify the characters' range. The order of the character range inside the square brackets doesn't matter. For example, the regular expression `[Ww]lk` means: an uppercase `W` or lowercase `w`, followed by the letter `l` followed by the letter `k`.
+
 ### Character Classes
 The character class ```\d``` matches a single character that is a digit, from __0 to 9__. 
 
@@ -54,6 +57,14 @@ The character class ```\w``` matches a single word character which can be __alph
 ```.``` matches __any__ character. When escaped with a backslash, as in ```\.```, the regex identifies a literal ```.```.
 
 ### Grouping and Capturing
+
+The first capturing group of the URL regex, ```(https?:\/\/)```, includes a pattern that matches an "h", "t, "t", "p", optional "s" character followed by a ":", two escaped "/", and a ```?``` quantifier, indicating 0 or 1 of the preceding capturing group. The URL may or may not include an ```http://``` or ```https://```.
+
+The second capturing group, ```([\da-z\.-]+)```, includes a bracketed character set ```[\da-z\.-]``` which matches any character including a digit character ```\d```, a character from a-z, case-sensitive, an escaped ```.```, and/or ```-```. This character set is followed by the ```+``` quantifier, indicating 1 or more of the preceding character set. This second capturing group is then followed by an escaped ```\.```. The URL includes at least 1 or more of the bracketed character set, followed by a ```.```, as in ```google.``` or ```www.google.``` in  ```www.google.com```.
+
+The third capturing group, ```([a-z\.]{2,6})```, includes a bracketed character set ```[a-z\.]``` which matches any character including an a-z character, case-sensitive, and an escaped ```\.```. This is found 2 and up to 6 times as indicated by the ```{2,6}``` quantifier. Examples of this capturing group include ```.com```, ```.io``` and ```.gov```.
+
+The last capturing group, ```([\/\w \.-]*)``` includes a bracketed character set ```[\/\w \.-]``` which matches any character including an escaped ```\/```, an escaped alphanumeric or underscore word character ```\w```, an escaped ```\.```, and/or ```-``` character. This set is followed by the ```*``` quantifier, indicating a match of 0 or more of the preceding character set. This entire last capturing group is then matched 0 or more times, as indicated by the ```*``` quantifier following the last capturing group, meaning this entire portion of the URL is optional or can have as many additions as delineated.
 
 ## Author
 
