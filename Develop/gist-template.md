@@ -26,4 +26,4 @@ This tutorial describes the regex, or sequence of characters that defines the sp
 
 ## Author
 
-Created by Zhongcheng Zhao. For additional questions and information, please go to my [GitHub profile](github.com/zhngzh527/)
+Created by Zhongcheng Zhao. For additional questions and information, please go to my [GitHub profile](https://github.com/zhngzh527)
