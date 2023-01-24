@@ -16,7 +16,19 @@ This tutorial describes the regex, or sequence of characters that defines the sp
 
 ## Regex Components
 
+Components of a regex matching a URL include:
+* Anchors ```^``` ```$```
+* Quantifiers ```*``` ```+``` ```?``` ```{}```
+* Character classes ```\d``` ```\w``` ```.```
+* Grouping and capturing ```()```
+* Bracket expressions ```[]```
+* Greedy match ```*```
+
 ### Anchors
+
+The first type is the caret `^` that checks if the matching character is the first character of the input and the second type is the dollar sign `$` which checks if a matching character is the last character of the input string.
+
+In the URL regex, we see two slashes at the start and end, as seen in ```/wlk/```, which flags, or delimits the beginning and end of a regex pattern. We then see ```^``` and ```$``` at those two ends to signify the search pattern found in between those characters.
 
 ### Quantifiers
 
